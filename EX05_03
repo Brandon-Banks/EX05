@@ -1,0 +1,98 @@
+#include <iostream>
+using namespace std;
+
+template<typename B>
+class MyVector
+{
+public:
+  MyVector();
+  void push_back(B element);
+  void pop_back();
+  unsigned int size();
+  bool empty();
+  B at(int index);
+  void clear();
+  void swap(MyVector v2);
+
+private:
+  B elements[100];
+  int vectorSize;
+};
+
+template<typename B>
+MyVector<B>::MyVector()
+{
+  vectorSize = 0;
+}
+
+template<typename B>
+bool MyVector<B>::empty()
+{
+  return (vectorSize == 0);
+}
+
+template<typename B>
+T MyVector<B>::at(int index)
+{
+  return elements[index];
+}
+
+template<typename B>
+void MyVector<B>::push_back(B value)
+{
+  elements[vectorSize++] = value;
+}
+
+template<typename B>
+void MyVector<B>::pop_back()
+{
+  return elements[--vectorSize];
+}
+
+template<typename B>
+unsigned int MyVector<B>::size()
+{
+  return vectorSize;
+}
+
+template<typename B>
+void MyVector<B>::clear()
+{
+  vectorSize = 0;
+}
+
+template<typename B>
+void MyVector<B>::swap(MyVector v2)
+{
+  B temp[100];
+  int tempSize = v2.size();
+  for (int i = 0; i < v2.size(); i++)
+    temp[i] = v2.at(i);
+
+  v2.clear();
+  for (int i = 0; i < size(); i++)
+    v2.push_back(at(i));
+
+  clear();
+  for (int i = 0; i < tempSize; i++)
+    push_back(temp[i]);
+}
+
+int main()
+{
+  MyVector<int> v1;
+  v1.push_back(1);
+  v1.push_back(2);
+
+  MyVector<int> v2;
+  v2.push_back(3);
+  v2.push_back(4);
+  v2.push_back(5);
+  v2.push_back(6);
+  v2.push_back(7);
+
+  v1.swap(v2);
+
+  for (int i = 0; i < v1.size(); i++)
+    cout << v1.at(i) << " ";
+}

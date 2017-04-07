@@ -1,0 +1,43 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+template <typename B>
+bool isSorted(const B list[], int size);
+
+int main() {
+	int intarray[5] = { 8, 6, 2, 7, 2 };
+	double darray[5] = { 4.6, 8.5, 4.8, 7.2, 5.2 };
+	string strarray[5] = { "I", "am", "so", "the", "coolest" };
+
+	cout << boolalpha << isSorted(intarray, 5) << endl; 
+	cout << boolalpha << isSorted(darray, 5) << endl; 
+	cout << boolalpha << isSorted(strarray, 5) << endl;
+}
+
+template <typename B>
+bool isSorted(const B list[], int size)
+{
+	if (list[0] <= list[1]) {
+		for (int i = 2; i < size; i++)
+		{ 
+			if (list[i - 1] > list[i]) 
+			{ 
+				if (list[0] == list[1])
+					continue; 
+				else
+					return false;
+			}
+		}
+	}
+
+	if (list[0] >= list[1])
+	{ 
+		for (int i = 2; i < size; i++) 
+		{
+			if (list[i - 1] < list[i])
+				return false;
+		}
+	}
+	return true;
+}

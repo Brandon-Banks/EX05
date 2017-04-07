@@ -1,0 +1,54 @@
+#include <iostream>
+#include <ctime>
+#include <vector>
+#include <string>
+using namespace std;
+
+template<typename B>
+void shuffle(vector<B> &v);
+template <typename B>
+bool include(B list[], int size, B key);
+
+int main() 
+{
+	srand(time(NULL));
+	vector<int> vint;
+	for (int i = 0; i < 10; i++)
+  {
+		vint.push_back(i);
+	}
+	shuffle(vint);
+	for (int i = 0; i < 10; i++)
+  {
+		cout << vint.at(i) << endl;
+	}
+}
+
+template<typename B>
+void shuffle(vector<B> &v) 
+{
+	vector<B> temp;
+	T locations[v.size()];
+	for (int i = 0; i < v.size(); i++) 
+  {
+		do 
+    {
+			locations[i] = rand() % v.size();
+		} 
+    while (i != 0 || include(locations, i, locations[i]));
+		temp.push_back(v.at(locations[i]));
+	}
+	v.swap(temp);
+}
+
+
+template <typename B>
+bool include(B list[], int limit, B key) 
+{
+	for (int i = 0; i < limit; i++) 
+  {
+		if (key == list[i])
+			return true;
+	}
+	return false;
+}
